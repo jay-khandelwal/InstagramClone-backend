@@ -1,0 +1,7 @@
+{% extends "admin/base.html" %}
+
+            {% block welcome-msg %}
+                <h4>Welcome</h4>
+                <strong>{% firstof user.full_name user.get_username %}</strong>.
+            {% endblock %}
+ 
