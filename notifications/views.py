@@ -6,6 +6,7 @@ from .serializers import NotificationsSerializers
 from .models import Notification
 from .signals import updateNotificationSignal
 from posts.views import CustomListApiView
+from accounts.models import ConnectedUsers
 
 class GetNotificationsApiView(generics.ListAPIView):
     serializer_class = NotificationsSerializers  
@@ -18,7 +19,8 @@ class GetNotificationsApiView(generics.ListAPIView):
         notify = Notification.objects.filter(target=user).order_by('-timestamp')
     
         Notification.objects.filter(target=user, read=False).update(read=True)
-        updateNotificationSignal(user)        
+        if user in ConnectedUsers.objects.first().users.all():
+            updateNotificationSignal(user)   
       
         return notify
             
