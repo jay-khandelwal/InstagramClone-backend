@@ -6,7 +6,7 @@ from django.conf import settings
 class CustomAdapter(DefaultAccountAdapter):
     
     def get_email_confirmation_url(self, emailconfirmation, current_site):
-        url = current_site.domain + 'accounts/confirm-email/' + emailconfirmation.key
+        url = current_site.domain + '/accounts/confirm-email/' + emailconfirmation.key
         return url
     
     def send_confirmation_mail(self, request, emailconfirmation, signup):
