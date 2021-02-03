@@ -82,12 +82,26 @@ CHANNEL_LAYERS = {
     },
 }
 
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+'''
+
+DATABASES ={
+      'default':{
+        'ENGINE' : 'django.db.backends.mysql',
+        'NAME' : config('DNAME'),
+        'USER' : config('DUSER'),
+        'PASSWORD' : config('DPASSWORD'),
+        'HOST' : config('DHOST'),
+        'PORT' : config('DPORT'),
+    }
+}
+
 
 
 AUTH_PASSWORD_VALIDATORS = [
