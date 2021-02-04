@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'friendRequest',
     'chatSystem',
     'notifications',
+    
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -81,15 +83,6 @@ CHANNEL_LAYERS = {
         },
     },
 }
-
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-'''
 
 DATABASES ={
       'default':{
@@ -139,9 +132,20 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+# saving media files to aws s3
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
+AWS_DEFAULT_ACL = None
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+DEFAULT_FILE_STORAGE = 'Instagram.storage_backends.MediaStorage'
+
+
 AUTH_USER_MODEL = 'accounts.User'
-
-
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'posts.pagination.CustomPagination',
@@ -194,3 +198,4 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 OLD_PASSWORD_FIELD_ENABLED=True
 
 ACCOUNT_ADAPTER = 'accounts.adapter.CustomAdapter'
+
