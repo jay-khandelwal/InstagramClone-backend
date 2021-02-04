@@ -22,7 +22,7 @@ class Likes(models.Model):
 
 
 def post_img_path(instance, filename):
-    return 'user_{0}/posts/{1}'.format(instance.id, filename)
+    return 'user_{0}/posts/{1}'.format(instance.user.id, filename)
 
 
 class Posts(models.Model):
