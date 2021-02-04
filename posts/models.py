@@ -21,10 +21,13 @@ class Likes(models.Model):
         return self.user.username
 
 
+def post_img_path(instance, filename):
+    return 'user_{0}/posts/{1}'.format(instance.id, filename)
+
 
 class Posts(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True, upload_to=post_img_path)
     caption = models.CharField(max_length=500, blank=True)
  #   comments = models.ManyToManyField(Comments, blank=True)
     slug = models.SlugField(blank=True)

@@ -12,6 +12,9 @@ Gender = (
     (2,'Female'),
     (3,'Other'),
     )
+
+def profile_pic_path(instance, filename):
+    return 'user_{0}/profile_pic/{1}'.format(instance.id, filename)
         
         
 class User(AbstractBaseUser, PermissionsMixin):
@@ -45,7 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     
-    profile_pic = models.ImageField(blank=True, null=True)
+    profile_pic = models.ImageField(blank=True, null=True, upload_to=profile_pic_path)
     bio = models.CharField(max_length=400, blank=True)
     website = models.URLField(max_length=400, blank=True)
     phone_no=models.CharField(max_length=12, blank=True)
