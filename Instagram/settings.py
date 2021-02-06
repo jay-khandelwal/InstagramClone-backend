@@ -206,3 +206,4 @@ OLD_PASSWORD_FIELD_ENABLED=True
 
 ACCOUNT_ADAPTER = 'accounts.adapter.CustomAdapter'
 
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
