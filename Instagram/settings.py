@@ -7,7 +7,7 @@ DEBUG = True
 
 SECRET_KEY = config('SECRET_KEY')
 
-ALLOWED_HOSTS = ['http://3.7.73.217/']
+ALLOWED_HOSTS = ['3.7.73.217', 'ec2-3-7-73-217.ap-south-1.compute.amazonaws.com']
 
 
 INSTALLED_APPS = [
