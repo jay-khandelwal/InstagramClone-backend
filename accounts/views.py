@@ -181,3 +181,13 @@ class GetSuperuserApiView(generics.ListAPIView):
         qs = User.objects.filter(is_superuser=True)
         return qs
             
+            
+class TokenVerifierApiView(generics.GenericAPIView):
+    permission_classes = [
+            permissions.IsAuthenticated
+        ]
+    def post(self, *args, **kwargs):
+        if self.request.user.username == self.request.data['username']:
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)

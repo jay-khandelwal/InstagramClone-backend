@@ -96,7 +96,7 @@ class LoginSerializer(serializers.Serializer):
                 msg = _('User account is disabled.')
                 raise exceptions.ValidationError(msg)
         else:
-            msg = ['Your password or username is incorrect. Please Try Again.', 'wrong_data']
+            msg = ['Your password or username/email is incorrect. Please try again.', 'wrong_data']
             raise exceptions.ValidationError(msg)
 
         # If required, is the email verified?
@@ -105,10 +105,8 @@ class LoginSerializer(serializers.Serializer):
             if app_settings.EMAIL_VERIFICATION == app_settings.EmailVerificationMethod.MANDATORY:
                 email_address = user.emailaddress_set.get(email=user.email)
                 if not email_address.verified:
-                 #   dic = {'type':'email', 'mssg':'E-mail is not verified.'}
                     dic = ['E-mail is not verified.', 'email']
                     raise serializers.ValidationError(dic)
-                  #  raise serializers.ValidationError(_('E-mail is not verified.'))
 
         attrs['user'] = user
         return attrs         
@@ -206,7 +204,7 @@ class ReverifyEmailSerializer(serializers.Serializer):
                 msg = _('User account is disabled.')
                 raise exceptions.ValidationError(msg)
         else:
-            msg = _('Your password or username is incorrect. Please Try Again.')
+            msg = _('Your password or username/email is incorrect. Please try again.')
             raise exceptions.ValidationError(msg)
 
         # If required, is the email verified?

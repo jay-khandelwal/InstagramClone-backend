@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import InitialDataApiView, ProfileRetriveUpdateApiView, ProfileDetailView, SearchUserListApiView, RetrieveUpdatePrivacyApiView, GetChattedUserApiView, GetUserDetailApiView, ReverifyEmailApiView, GetSuperuserApiView
+from .views import InitialDataApiView, ProfileRetriveUpdateApiView, ProfileDetailView, SearchUserListApiView, RetrieveUpdatePrivacyApiView, GetChattedUserApiView, GetUserDetailApiView, ReverifyEmailApiView, GetSuperuserApiView, TokenVerifierApiView
 
 
 app_name = 'accounts'
@@ -18,4 +18,6 @@ urlpatterns = [
         
         # for checking purposes
         path('chat/user/',GetChattedUserApiView.as_view() ),
+        
+        path('verifier/', TokenVerifierApiView.as_view()),
 ]

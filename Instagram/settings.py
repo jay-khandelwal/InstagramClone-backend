@@ -7,7 +7,7 @@ DEBUG = True
 
 SECRET_KEY = config('SECRET_KEY')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['http://3.7.73.217/']
 
 
 INSTALLED_APPS = [
@@ -95,14 +95,6 @@ DATABASES ={
         'PORT' : config('DPORT'),
     }
 }
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-'''
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -177,7 +169,7 @@ REST_AUTH_SERIALIZERS = {
 }
 
 ACCOUNT_EMAIL_REQUIRED = True
-#ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 AUTHENTICATION_BACKENDS = [
@@ -205,5 +197,3 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 OLD_PASSWORD_FIELD_ENABLED=True
 
 ACCOUNT_ADAPTER = 'accounts.adapter.CustomAdapter'
-
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
