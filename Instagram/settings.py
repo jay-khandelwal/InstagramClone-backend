@@ -93,6 +93,7 @@ DATABASES ={
         'PASSWORD' : config('DPASSWORD'),
         'HOST' : config('DHOST'),
         'PORT' : config('DPORT'),
+        'OPTIONS': {'charset': 'utf8mb4'}, 
     }
 }
 
