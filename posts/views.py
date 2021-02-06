@@ -87,18 +87,20 @@ class CreateSavedPostApiView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         try:
             slug = request.data['slug']
-            if request.data['saved']==False :
-                post = get_object_or_404(Posts, slug=slug)
+            post = get_object_or_404(Posts, slug=slug)
+            already_saved = SavedPosts.objects.filter(user=request.user, post=post).exists()
+            if request.data['saved']==False and not already_saved :
                 obj = SavedPosts.objects.create(post=post, user=request.user)
                 return Response(status=status.HTTP_201_CREATED)
             
-            if request.data['saved']==True :
-                post = get_object_or_404(Posts, slug=slug)
+            elif request.data['saved']==True and already_saved :
                 obj = get_object_or_404(SavedPosts, user=request.user, post=post)
                 if obj:
                     obj.delete()
                     return Response(status=status.HTTP_204_NO_CONTENT)
-                    
+            
+            else:
+              return Response(status=status.HTTP_403_FORBIDDEN)  
                 
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)
